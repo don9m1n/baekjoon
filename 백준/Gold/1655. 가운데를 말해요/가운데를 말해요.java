@@ -9,26 +9,24 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
 
-        PriorityQueue<Integer> min = new PriorityQueue<>(Comparator.reverseOrder());
-        PriorityQueue<Integer> max = new PriorityQueue<>();
+        PriorityQueue<Integer> left = new PriorityQueue<>(Comparator.reverseOrder());
+        PriorityQueue<Integer> right = new PriorityQueue<>();
 
         for (int i = 0; i < n; i++) {
             int num = Integer.parseInt(br.readLine());
 
-            if (min.size() == max.size()) {
-                min.add(num);
+            if (left.size() == right.size()) {
+                left.add(num);
             } else {
-                max.add(num);
+                right.add(num);
             }
 
-            if(!min.isEmpty() && !max.isEmpty()){
-                if (min.peek() > max.peek()) {
-                    max.add(min.poll());
-                    min.add(max.poll());
-                }
+            if(!left.isEmpty() && !right.isEmpty() && left.peek() > right.peek()){
+                right.add(left.poll());
+                left.add(right.poll());
             }
 
-            System.out.println(min.peek());
+            System.out.println(left.peek());
         }
     }
 }
