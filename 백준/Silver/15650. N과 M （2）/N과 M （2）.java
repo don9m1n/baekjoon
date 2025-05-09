@@ -28,16 +28,17 @@ public class Main {
         }
 
         for (int i = 1; i <= n; i++) {
-            if (!visited[i] && sequence.isEmpty()) {
-                   recursive(index + 1, sequence + " " + i);
-            }
-            if (!visited[i] && sequence.length() > 1) {
-                int prev = Integer.parseInt(String.valueOf(sequence.charAt(sequence.length() - 1)));
-
-                if (i > prev) {
-                    visited[i] = true;
+            if (!visited[i]) {
+                if (sequence.isEmpty()) {
                     recursive(index + 1, sequence + " " + i);
-                    visited[i] = false;
+                } else {
+                    int prev = Integer.parseInt(String.valueOf(sequence.charAt(sequence.length() - 1)));
+
+                    if (i > prev) {
+                        visited[i] = true;
+                        recursive(index + 1, sequence + " " + i);
+                        visited[i] = false;
+                    }
                 }
             }
         }
